@@ -1,4 +1,9 @@
 android-sdk*
+.android
+.vi*
+.bash*
+.ssh*
 *.log
 *.cnf
 wikipedia
+*.apk
