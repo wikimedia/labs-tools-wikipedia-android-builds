@@ -9,7 +9,7 @@ export PATH=$M2:$ANDROID_HOME/tools:$ANDROID_BUILD_TOOLS:$JAVA_HOME/bin:$PATH
 REPO="$HOME/wikipedia"
 BRANCH=master
 START_TIME=`TZ="UTC" date "+%Y-%m-%dT%H:%M"`
-OUT_DIR="$HOME/public_html/job/${BRANCH}"
+OUT_DIR="$HOME/job/${BRANCH}"
 JOB_DIR="${OUT_DIR}/${START_TIME}"
 
 if [[ -d ${JOB_DIR} ]]; then
@@ -19,7 +19,7 @@ fi
 
 mkdir -p ${JOB_DIR}
 cd ${OUT_DIR}
-ln -sf ${START_TIME} latest
+ln -sf ${START_TIME} current
 
 cd ${REPO}
 git checkout ${BRANCH}
@@ -34,3 +34,5 @@ mvn clean install > ${JOB_DIR}/mvn.log
 
 # copy more artifacts:
 cp target/wikipedia*.apk ${JOB_DIR}/
+
+ln -sf ${START_TIME} latest

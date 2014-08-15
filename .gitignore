@@ -1,11 +1,8 @@
-/public_html/job
-
-android-sdk*
-.android
-.vi*
-.bash*
-.ssh*
+android-sdk*/
+apache-maven*/
+wikipedia/
+job/
+tmp/
 *.log
 *.cnf
-wikipedia
-*.apk
+.*

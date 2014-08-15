@@ -1,0 +1,1 @@
+0,30 * * * * jsub -once -o job/master/control/check_repo-out.txt -e job/master/control/check_repo-err.txt bin/check_repo.bash
