@@ -1,5 +1,35 @@
+<!DOCTYPE html>
 <html>
-<body>
-<h1>Test!</h1>
-</body>
-</html>
+    <head>
+        <title>Wikipedia Android app build status</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link href="bootstrap.css" rel="stylesheet" />
+        <link href="bootstrap-theme.css" rel="stylesheet" />
+
+        <style>
+            h1 small {
+                display: block;
+            }
+        </style>
+
+        <script src="jquery-1.11.1.min.js"> </script>
+        <script src="main.js"> </script>
+    </head>
+    <body>
+        <div class='container'>
+            <h1><small>Automated builds for</small>Wikipedia Android app</h1>
+
+            <hr >
+
+            <div>
+                <h4>Last successful build</h4>
+                <strong id='last-build-time'>Fetching...</strong>
+            </div>
+
+            <hr />
+            <a href="runs/latest/wikipedia.apk" type="button" class="btn btn-primary btn-lg">Download latest build</a>
+        </div>
+    </body>
+</html
