@@ -1,6 +1,7 @@
 #!/data/project/wikipedia-android-builds/bin/python
 import os
 import sh
+import json
 from datetime import datetime
 
 # Environment variables required for mvn to build app
@@ -20,16 +21,24 @@ sh.git('fetch')
 commit_count = int(sh.git('rev-list', 'HEAD..origin/master', '--count'))
 
 if commit_count != 0:
+    meta = {
+        'commit_count': commit_count
+    }
+
     # Create the output directory
     run_slug = 'master-%s' % datetime.now().isoformat()
     run_path = os.path.expanduser('~/public_html/runs/%s' % run_slug)
     sh.mkdir('-p', run_path)
 
+    meta['commits'] = str(sh.git('rev-list', 'HEAD..origin/master', '--oneline')).split('\n')
+
     sh.git('reset', '--hard', 'origin/master')
 
-    commit_hash = sh.git('rev-parse', 'HEAD')
+    commit_hash = str(sh.git('rev-parse', 'HEAD')).strip()
 
-    print 'Starting build for %s, with %s new commits' % (commit_hash.strip(), commit_count)
+    meta['commit_hash'] = commit_hash
+
+    print 'Starting build for %s, with %s new commits' % (commit_hash, commit_count)
     # Run in side the app folder, since we can't run
     # instrumentation tests
     sh.cd(os.path.join(REPO_PATH, 'wikipedia'))
@@ -39,6 +48,9 @@ if commit_count != 0:
     print 'Finished build, output at %s' % run_path
 
     sh.cp('target/wikipedia.apk', run_path)
+
+    meta['completed_on'] = datetime.now().isoformat()
+    json.dump(meta, open(os.path.join(run_path, 'meta.json'), 'w'))
 
     latest_path = os.path.expanduser('~/public_html/runs/latest')
     sh.rm('-f', latest_path)
