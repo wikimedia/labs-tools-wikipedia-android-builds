@@ -38,6 +38,10 @@ if commit_count != 0:
 
     meta['commit_hash'] = commit_hash
 
+    # Change the package name to .master
+    prepare_release = sh.Command(os.path.expanduser('~/wikipedia/scripts/prepare-release.py'))
+    prepare_release('--custompackage', 'master')
+
     print 'Starting build for %s, with %s new commits' % (commit_hash, commit_count)
     # Run in side the app folder, since we can't run
     # instrumentation tests
