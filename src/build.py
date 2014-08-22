@@ -27,11 +27,16 @@ if commit_count != 0:
 
     sh.git('reset', '--hard', 'origin/master')
 
+    commit_hash = sh.git('rev-parse', 'HEAD')
+
+    print 'Starting build for %s, with %s new commits' % (commit_hash.strip(), commit_count)
     # Run in side the app folder, since we can't run
     # instrumentation tests
     sh.cd(os.path.join(REPO_PATH, 'wikipedia'))
     mvn = sh.Command(os.path.expanduser('~/mvn/bin/mvn'))
     mvn('clean', 'install', _env=env)
+
+    print 'Finished build, output at %s' % run_path
 
     sh.cp('target/wikipedia.apk', run_path)
 else:
