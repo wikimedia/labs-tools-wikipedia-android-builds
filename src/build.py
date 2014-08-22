@@ -39,5 +39,9 @@ if commit_count != 0:
     print 'Finished build, output at %s' % run_path
 
     sh.cp('target/wikipedia.apk', run_path)
+
+    latest_path = os.path.expanduser('~/public_html/runs/latest')
+    sh.rm('-f', latest_path)
+    sh.ln('-s', run_path, latest_path)
 else:
     print 'No new commits'
