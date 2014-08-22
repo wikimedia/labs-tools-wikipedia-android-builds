@@ -1,6 +1,7 @@
 $( function() {
     // Fetch the latest build's data
     $.get('/wikipedia-android-builds/runs/latest/meta.json').done( function( data ) {
-        $( '#last-build-time' ).text( data.completed_on );
+        var completed_on = new Date( data.completed_on );
+        $( '#last-build-time' ).text( completed_on.toLocaleString() );
     });
 });
