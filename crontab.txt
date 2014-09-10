@@ -1,1 +1,1 @@
-0,30 * * * * jsub -quiet -once /data/project/wikipedia-android-builds/src/build.py
+0,30 * * * * jsub -mem 8G -quiet -once /data/project/wikipedia-android-builds/src/build.py
