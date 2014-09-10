@@ -38,6 +38,9 @@ if commit_count != 0:
 
     meta['commit_hash'] = commit_hash
 
+    # Clean out previous alpha folder
+    sh.rm('-rf', '~/wikipedia/wikipedia/src/main/java/org/wikipedia/alpha')
+
     # Change the package name to .alpha
     prepare_release = sh.Command(os.path.expanduser('~/wikipedia/scripts/prepare-release.py'))
     prepare_release('--alpha')
