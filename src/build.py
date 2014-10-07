@@ -8,6 +8,7 @@ from datetime import datetime
 env = {
     'ANDROID_HOME': os.path.expanduser('~/adk'),
     'ANDROID_BUILD_TOOLS': os.path.expanduser('~/adk/build-tools/20.0.0'),
+    'JAVA_HOME': '/usr/lib/jvm/java-7-openjdk-amd64',
     'TERM': 'xterm-256color'
 }
 
