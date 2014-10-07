@@ -4,12 +4,11 @@ import sh
 import json
 from datetime import datetime
 
-# Environment variables required for mvn to build app
+# Environment variables required for Gradle to build app
 env = {
-    'M2_HOME': os.path.expanduser('~/mvn'),
-    'M2': os.path.expanduser('~/mvn'),
     'ANDROID_HOME': os.path.expanduser('~/adk'),
-    'ANDROID_BUILD_TOOLS': os.path.expanduser('~/adk/build-tools/20.0.0')
+    'ANDROID_BUILD_TOOLS': os.path.expanduser('~/adk/build-tools/20.0.0'),
+    'TERM': 'xterm-256color'
 }
 
 REPO_PATH = os.path.expanduser('~/wikipedia')
@@ -41,20 +40,14 @@ if commit_count != 0:
     # Clean out previous alpha folder
     sh.rm('-rf', '~/wikipedia/wikipedia/src/main/java/org/wikipedia/alpha')
 
-    # Change the package name to .alpha
-    prepare_release = sh.Command(os.path.expanduser('~/wikipedia/scripts/prepare-release.py'))
-    prepare_release('--alpha')
-
     print 'Starting build for %s, with %s new commits' % (commit_hash, commit_count)
-    # Run in side the app folder, since we can't run
-    # instrumentation tests
-    sh.cd(os.path.join(REPO_PATH, 'wikipedia'))
-    mvn = sh.Command(os.path.expanduser('~/mvn/bin/mvn'))
-    mvn('clean', 'install', _env=env)
+    sh.cd(REPO_PATH)
+    gradle = sh.Command('./gradlew')
+    gradle('-q', 'clean', 'assembleAlphaDebug', _env=env)
+
+    sh.cp('wikipedia/build/outputs/apk/wikipedia-2.0-alpha-*.apk', run_path)
 
     print 'Finished build, output at %s' % run_path
-
-    sh.cp('target/wikipedia.apk', run_path)
 
     meta['completed_on'] = datetime.now().isoformat()
     json.dump(meta, open(os.path.join(run_path, 'meta.json'), 'w'))
