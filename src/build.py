@@ -46,7 +46,7 @@ if commit_count != 0:
     gradle = sh.Command('./gradlew')
     gradle('-q', 'clean', 'assembleAlphaDebug', _env=env)
 
-    sh.cp('wikipedia/build/outputs/apk/wikipedia-2.0-alpha-*.apk', run_path)
+    sh.cp(sh.glob('wikipedia/build/outputs/apk/wikipedia-2.0-alpha-*.apk'), run_path)
 
     print 'Finished build, output at %s' % run_path
 
