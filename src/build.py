@@ -1,7 +1,9 @@
 #!/data/project/wikipedia-android-builds/bin/python
+from __future__ import print_function
 import os
 import sh
 import json
+import sys
 from datetime import datetime
 
 # Environment variables required for Gradle to build app
@@ -13,6 +15,10 @@ env = {
 }
 
 REPO_PATH = os.path.expanduser('~/wikipedia')
+
+start = '== %s ==' % datetime.now().isoformat()
+print(start, file=sys.stdout)
+print(start, file=sys.stderr)
 
 sh.cd(REPO_PATH)
 sh.git('fetch')
@@ -38,17 +44,15 @@ if commit_count != 0:
 
     meta['commit_hash'] = commit_hash
 
-    # Clean out previous alpha folder
-    sh.rm('-rf', '~/wikipedia/wikipedia/src/main/java/org/wikipedia/alpha')
+    print('Starting build for %s, with %s new commits' % (commit_hash, commit_count), file=sys.stdout)
 
-    print 'Starting build for %s, with %s new commits' % (commit_hash, commit_count)
     sh.cd(REPO_PATH)
     gradle = sh.Command('./gradlew')
     gradle('-q', 'clean', 'assembleAlphaDebug', _env=env)
 
     sh.cp(sh.glob('wikipedia/build/outputs/apk/wikipedia-2.0-alpha-*.apk'), run_path)
 
-    print 'Finished build, output at %s' % run_path
+    print('Finished build, output at %s' % run_path, file=sys.stdout)
 
     meta['completed_on'] = datetime.now().isoformat()
     json.dump(meta, open(os.path.join(run_path, 'meta.json'), 'w'))
@@ -57,4 +61,4 @@ if commit_count != 0:
     sh.rm('-f', latest_path)
     sh.ln('-s', run_path, latest_path)
 else:
-    print 'No new commits'
+    print('No new commits', file=sys.stdout)
