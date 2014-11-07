@@ -1,4 +1,4 @@
-#!/data/project/wikipedia-android-builds/bin/python
+#!/usr/bin/python
 from __future__ import print_function
 import os
 import sh
