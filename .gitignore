@@ -1,8 +1,5 @@
-android-sdk*/
-apache-maven*/
-wikipedia/
-job/
-tmp/
+/public_html/runs/
+*.pyc
 *.log
 *.cnf
 .*
