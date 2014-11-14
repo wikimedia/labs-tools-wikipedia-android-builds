@@ -1,8 +1,8 @@
-SDK_HOME_PATH="$HOME"
-SDK_PATH="$SDK_HOME_PATH/android-sdk-linux"
-SDK_PACKAGES="tools,platform-tools,build-tools-20.0.0,android-19,extra-android-m2repository"
+SDK_PATH="/srv/adk"
+SDK_PACKAGES="tools,platform-tools,build-tools-21.1.1,android-21,extra-android-m2repository"
+export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
 export _JAVA_OPTIONS="-Xmx256m"
-export ANDROID_SWT="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext"
+export ANDROID_SWT="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext"
  
 # Just install platform-tools, build-tools & Android-19
 # Filter names are from `android list sdk -e -a`
