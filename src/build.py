@@ -9,7 +9,7 @@ from datetime import datetime
 # Environment variables required for Gradle to build app
 env = {
     'ANDROID_HOME': os.path.expanduser('/srv/adk'),
-    'ANDROID_BUILD_TOOLS': os.path.expanduser('/srv/adk/build-tools/20.0.0'),
+#    'ANDROID_BUILD_TOOLS': os.path.expanduser('/srv/adk/build-tools/20.0.0'),
     'JAVA_HOME': '/usr/lib/jvm/java-7-openjdk-amd64',
     'TERM': 'xterm-256color'
 }
