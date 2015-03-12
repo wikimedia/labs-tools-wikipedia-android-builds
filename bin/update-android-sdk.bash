@@ -1,5 +1,5 @@
 SDK_PATH="/srv/adk"
-SDK_PACKAGES="tools,platform-tools,build-tools-21.1.2,android-10,android-21,extra-android-m2repository"
+SDK_PACKAGES="tools,platform-tools,build-tools-22.0.0,android-10,android-22,extra-android-m2repository"
 export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
 export _JAVA_OPTIONS="-Xmx256m"
 export ANDROID_SWT="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext"
