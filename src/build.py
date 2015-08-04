@@ -8,6 +8,7 @@ from datetime import datetime
 
 # Environment variables required for Gradle to build app
 env = {
+    'HOME': '/home/android-build',
     'ANDROID_HOME': os.path.expanduser('/srv/adk'),
 #    'ANDROID_BUILD_TOOLS': os.path.expanduser('/srv/adk/build-tools/20.0.0'),
     'JAVA_HOME': '/usr/lib/jvm/java-7-openjdk-amd64',
@@ -50,7 +51,7 @@ if commit_count != 0:
     gradle = sh.Command('./gradlew')
     gradle('-q', 'clean', 'assembleAlphaDebug', _env=env)
 
-    sh.cp(sh.glob('/srv/wikipedia/wikipedia/build/outputs/apk/wikipedia-alpha-debug.apk'),
+    sh.cp(sh.glob('/srv/wikipedia/app/build/outputs/apk/app-alpha-debug.apk'),
           os.path.join(run_path, 'wikipedia.apk'))
 
     print('Finished build, output at %s' % run_path, file=sys.stdout)
