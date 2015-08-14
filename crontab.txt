@@ -1,2 +1,2 @@
-0,30 * * * * /srv/builds/src/build.py >/srv/builds/log/out.log 2>/srv/builds/log/err.log
+0,15 * * * * /srv/builds/bin/copy-android-alpha.bash >/srv/builds/log/out.log 2>/srv/builds/log/err.log
 
