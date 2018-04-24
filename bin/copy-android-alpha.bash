@@ -6,6 +6,6 @@ declare latest_path='/srv/builds/public_html/runs/latest'
 [[ -d "$latest_path" ]] || mkdir "$latest_path"
 
 (cd "$latest_path";
-  curl -O 'https://integration.wikimedia.org/ci/job/apps-android-wikipedia-publish/lastSuccessfulBuild/artifact/{app/build/outputs/apk/alpha/release/app-alpha-release.apk,meta.json}'
-  mv app-alpha-release.apk wikipedia.apk
+  curl -O 'https://integration.wikimedia.org/ci/job/apps-android-wikipedia-publish/lastSuccessfulBuild/artifact/{app/build/outputs/apk/alpha/release/app-alpha-universal-release.apk,meta.json}'
+  mv app-alpha-universal-release.apk wikipedia.apk
 )
